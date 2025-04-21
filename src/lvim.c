@@ -6,7 +6,7 @@
 
 #include "coords.h"
 
-#define MAX_Y max_y-3
+#define MAX_Y max_y-1
 #define MAX_X max_x-1
 
 void
@@ -21,8 +21,8 @@ get_command(const char input)
 	if(!strcmp(command, "q")) {
 		exit(0);
 	} else {
-		move(MAX_Y, 0);
-		addstr("Unkown command");
+	  move(MAX_Y, 0);
+		clrtoeol();
 	}
 	free(command);
 	raw();
@@ -36,6 +36,7 @@ clean_screen()
 	endwin();
 }
 
+
 void
 setup_screen()
 {
@@ -44,7 +45,6 @@ setup_screen()
 	noecho();
 	keypad(stdscr, TRUE);
 	scrollok(stdscr, TRUE);
-	
 	getmaxyx(stdscr, max_y, max_x);
 
 	atexit(clean_screen);
@@ -54,7 +54,6 @@ int
 main()
 {
 	setup_screen();
-	
 	char input;
 	while((input = getch())) {
 		if(input == ':'){
