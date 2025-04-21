@@ -4,9 +4,15 @@
 #include <unistd.h>
 #include <ncurses.h>
 
+#include "coords.h"
+
+#define MAX_Y max_y-3
+#define MAX_X max_x-1
+
 void
 get_command(const char input)
 {
+	move(MAX_Y, 0);
 	noraw();
 	addch(':');
 	echo();
@@ -15,11 +21,13 @@ get_command(const char input)
 	if(!strcmp(command, "q")) {
 		exit(0);
 	} else {
+		move(MAX_Y, 0);
 		addstr("Unkown command");
 	}
 	free(command);
 	raw();
 	noecho();
+	move(current_y, current_x);
 }
 
 void
@@ -34,23 +42,26 @@ setup_screen()
 	initscr();
 	raw();
 	noecho();
-	keypad(stdscr, 1);
+	keypad(stdscr, TRUE);
+	scrollok(stdscr, TRUE);
 	
+	getmaxyx(stdscr, max_y, max_x);
+
 	atexit(clean_screen);
 }
 
 int
 main()
 {
-	int cur_y, cur_x;
-	int max_y, max_x;
-	cur_y = max_y = cur_x = max_x = 0;
-
 	setup_screen();
 	
 	char input;
 	while((input = getch())) {
-		input == ':' ? get_command(input) : 0;
+		if(input == ':'){
+			getyx(stdscr, current_y, current_x);
+			get_command(input);
+			continue;
+		}
 		printw("%c", input);
 		refresh();
 	}
