@@ -6,4 +6,6 @@ static int max_x;
 int 	 current_y;
 int 	 current_x;
 
+static char* command;
+
 #endif

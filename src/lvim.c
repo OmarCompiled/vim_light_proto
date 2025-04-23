@@ -6,8 +6,8 @@
 
 #include "coords.h"
 
-#define MAX_Y max_y-1
-#define MAX_X max_x-1
+#define MAX_Y max_y-2
+#define MAX_X max_x-2
 
 void
 get_command(const char input)
@@ -16,7 +16,7 @@ get_command(const char input)
 	noraw();
 	addch(':');
 	echo();
-	char *command = (char *)malloc(sizeof(char) * 100);
+	command = (char *)malloc(sizeof(char) * 100);
 	getstr(command);
 	if(!strcmp(command, "q")) {
 		exit(0);
@@ -24,7 +24,7 @@ get_command(const char input)
 	  move(MAX_Y, 0);
 		clrtoeol();
 	}
-	free(command);
+	command = NULL;
 	raw();
 	noecho();
 	move(current_y, current_x);
@@ -33,14 +33,15 @@ get_command(const char input)
 void
 clean_screen()
 {
+	free(command);
 	endwin();
 }
-
 
 void
 setup_screen()
 {
 	initscr();
+	erase();
 	raw();
 	noecho();
 	keypad(stdscr, TRUE);
