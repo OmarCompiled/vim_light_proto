@@ -43,6 +43,6 @@ update_status_bar()
 	werase(status_bar);
 	wprintw(status_bar, "--%s-- \t\t\t\t Ln %d, Col %d", MODE, current_y + 1, current_x + 1);
 	wrefresh(status_bar);
-}
+}	
 
 #endif

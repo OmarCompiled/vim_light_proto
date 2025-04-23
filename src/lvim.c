@@ -6,9 +6,9 @@
 #include <unistd.h>
 
 #include "config.h"
-#include "screen_handler.h"
-#include "command_handler.h"
-#include "keyhandler.h"
+#include "screen_handler.c"
+#include "command_handler.c"
+#include "keyhandler.c"
 
 int
 main()
