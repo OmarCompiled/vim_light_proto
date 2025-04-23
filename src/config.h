@@ -12,6 +12,8 @@ int 	 current_x = 0;
 /* command prompt string  */
 static char* command;
 
+char* MODE;
+
 WINDOW* status_bar;
 
 #endif
