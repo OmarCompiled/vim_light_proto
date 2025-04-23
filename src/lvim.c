@@ -10,6 +10,15 @@
 #define MAX_X max_x-2
 
 void
+back_to_position()
+{
+	command = NULL;
+	raw();
+	noecho();
+	move(current_y, current_x);
+}
+
+void
 get_command(const char input)
 {
 	move(MAX_Y, 0);
@@ -24,10 +33,7 @@ get_command(const char input)
 	  move(MAX_Y, 0);
 		clrtoeol();
 	}
-	command = NULL;
-	raw();
-	noecho();
-	move(current_y, current_x);
+	back_to_position();
 }
 
 void
