@@ -4,31 +4,56 @@
 #define KEYHANDLER_C
 
 void
-input_loop(char input)
+input_loop(int input)
 {
-	while(input = getch()) {
+	while(true) {
+		input = getch();
 		getyx(stdscr, current_y, current_x);
 		if(input == 27) {
 			MODE = "";
-			update_display(input);
+			update_status_bar();
 			return;
 		}
-		
-		if(input == KEY_UP) {
+
+		if(input == '\n') {
 			current_y++;
+			update_status_bar();
+			move(current_y, 0);
+			continue;
 		}
 
+		if(input == KEY_UP) {
+			current_y--;
+			update_status_bar();
+			move(current_y, current_x);
+			continue;
+		} else if(input == KEY_DOWN) {
+			current_y++;
+			update_status_bar();
+			move(current_y, current_x);
+			continue;
+		} else if(input == KEY_LEFT) {
+			current_x--;
+			update_status_bar();
+			move(current_y, current_x);
+			continue;
+		} else if(input == KEY_RIGHT) {
+			current_x++;
+			update_status_bar();
+			move(current_y, current_x);
+			continue;
+		}
 		update_display(input);
 	}
 }
 
-
 void
-keyhandler(const char input)
+keyhandler(int input)
 {
 	switch(input) {
 	case 'i':
 		MODE = "INSERT";
+		update_status_bar();
 		input_loop(input);
 		break;
 	case ':':

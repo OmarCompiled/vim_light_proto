@@ -14,10 +14,10 @@ int
 main()
 {
 	ESCDELAY = 50;
-	char input;
+	int input;
 	setup_screen();
 
-	while(input = getch()){
+	while(input = getch()) {
 		keyhandler(input);
 	}
 }

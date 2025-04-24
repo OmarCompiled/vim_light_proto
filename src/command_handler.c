@@ -13,7 +13,7 @@ validate_command()
 }
 
 void
-get_command(const char input)
+get_command()
 {
 	move(MAX_Y, 0);
 	noraw();
@@ -26,7 +26,7 @@ get_command(const char input)
 }
 
 bool
-check_for_command(const char input)
+check_for_command(int input)
 {
 	if(input == ':'){
 		get_command(input);

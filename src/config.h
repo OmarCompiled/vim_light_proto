@@ -6,8 +6,8 @@
 /* coordinate variables */
 static int max_y;
 static int max_x;
-int 	 current_y = 0;
-int 	 current_x = 0;
+static int current_y = 0;
+static int current_x = 0;
 
 /* command prompt string  */
 static char* command;
