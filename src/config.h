@@ -14,6 +14,18 @@ static char* command;
 
 char* MODE;
 
+bool
+isArrow(int input)
+{
+	if(input == KEY_UP
+	|| input == KEY_DOWN
+	|| input == KEY_LEFT
+	|| input == KEY_RIGHT) {
+		return true;
+	}
+	return false;
+}
+
 WINDOW* status_bar;
 
 #endif

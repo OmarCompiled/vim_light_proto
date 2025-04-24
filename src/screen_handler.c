@@ -50,7 +50,7 @@ void
 update_display(int input)
 {
 	update_status_bar();
-	if(input != 27) {
+	if(input != 27 && !isArrow(input)) {
 		printw("%c", input);
 		refresh();
 	}
