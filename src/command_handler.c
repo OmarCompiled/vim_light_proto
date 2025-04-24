@@ -1,3 +1,5 @@
+#include <ncurses.h>
+
 #ifndef COMMAND_HANDLER_H
 #define COMMAND_HANDLER_H
 
@@ -9,6 +11,14 @@ validate_command()
 	} else {
 	  move(MAX_Y, 0);
 		clrtoeol();
+		raw();
+	  move(MAX_Y, 0);
+		attron(A_REVERSE);
+		addstr("unkown command!");
+		attroff(A_REVERSE);
+		getch();
+		move(MAX_Y, 0);
+		clrtoeol();		
 	}
 }
 

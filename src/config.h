@@ -15,7 +15,7 @@ static char* command;
 char* MODE;
 
 bool
-isArrow(int input)
+isArrowKey(int input)
 {
 	if(input == KEY_UP
 	|| input == KEY_DOWN

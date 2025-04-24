@@ -4,6 +4,28 @@
 #define KEYHANDLER_C
 
 void
+arrow_handler(int input)
+{
+	if(input == KEY_UP && current_y > 0) {
+		current_y--;
+		update_status_bar();
+		move(current_y, current_x);
+	} else if(input == KEY_DOWN && current_y < LINES - 2) {
+		current_y++;
+		update_status_bar();
+		move(current_y, current_x);
+	} else if(input == KEY_LEFT && current_x > 0) {
+		current_x--;
+		update_status_bar();
+		move(current_y, current_x);
+	} else if(input == KEY_RIGHT && current_x < COLS - 1) {
+		current_x++;
+		update_status_bar();
+		move(current_y, current_x);
+	}
+}
+
+void
 input_loop(int input)
 {
 	while(true) {
@@ -23,27 +45,11 @@ input_loop(int input)
 			continue;
 		}
 
-		if(input == KEY_UP && current_y > 0) {
-			current_y--;
-			update_status_bar();
-			move(current_y, current_x);
-			continue;
-		} else if(input == KEY_DOWN && current_y < LINES - 2) {
-			current_y++;
-			update_status_bar();
-			move(current_y, current_x);
-			continue;
-		} else if(input == KEY_LEFT && current_x > 0) {
-			current_x--;
-			update_status_bar();
-			move(current_y, current_x);
-			continue;
-		} else if(input == KEY_RIGHT && current_x < COLS - 1) {
-			current_x++;
-			update_status_bar();
-			move(current_y, current_x);
+		if(isArrowKey(input)) {
+			arrow_handler(input);
 			continue;
 		}
+
 		update_display(input);
 	}
 }
