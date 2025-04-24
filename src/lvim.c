@@ -8,16 +8,16 @@
 #include "config.h"
 #include "screen_handler.c"
 #include "command_handler.c"
-#include "keyhandler.c"
+#include "key_handler.c"
 
 int
 main()
 {
+	ESCDELAY = 50;
 	char input;
 	setup_screen();
 
-	while(true){
-		input = getch();
+	while(input = getch()){
 		keyhandler(input);
 	}
 }

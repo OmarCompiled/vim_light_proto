@@ -8,27 +8,32 @@ input_loop(char input)
 {
 	while(input = getch()) {
 		getyx(stdscr, current_y, current_x);
-		if(KEY_ENTER) {
-			LINES++;
-		} else if(KEY_SDC) {
-			break;
+		if(input == 27) {
+			MODE = "";
+			update_display(input);
+			return;
 		}
-		if(check_for_command(input)) {
-			continue;
+		
+		if(input == KEY_UP) {
+			current_y++;
 		}
 
-		update_status_bar();
-		printw("%c", input);
-		refresh();
+		update_display(input);
 	}
 }
+
 
 void
 keyhandler(const char input)
 {
-	if(input == 'i') {
+	switch(input) {
+	case 'i':
 		MODE = "INSERT";
 		input_loop(input);
+		break;
+	case ':':
+		check_for_command(input);
+		break;
 	}
 }
 
