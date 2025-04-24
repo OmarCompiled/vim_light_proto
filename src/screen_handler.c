@@ -41,7 +41,7 @@ void
 update_status_bar()
 {
 	werase(status_bar);
-	wprintw(status_bar, "--%s-- \t\t\t\t Ln %d, Col %d", MODE, current_y + 1, current_x + 1);
+	wprintw(status_bar, " --%6s-- \t\t\t\t\t\t %2d:%2d",MODE, current_y + 1, current_x + 1);
 	wrefresh(status_bar);
 	wmove(stdscr, current_y, current_x);
 }
@@ -50,7 +50,7 @@ void
 update_display(int input)
 {
 	update_status_bar();
-	if(input != 27 && !isArrowKey(input)) {
+	if(!isEscapeKey(input) && !isArrowKey(input)) {
 		printw("%c", input);
 		refresh();
 	}

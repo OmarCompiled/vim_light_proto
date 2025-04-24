@@ -14,6 +14,13 @@ static char* command;
 
 char* MODE;
 
+/* helper functions / type checking */
+bool
+isEscapeKey(int input)
+{
+	return (input == 27 ? true : false); 
+}
+
 bool
 isArrowKey(int input)
 {
@@ -21,6 +28,16 @@ isArrowKey(int input)
 	|| input == KEY_DOWN
 	|| input == KEY_LEFT
 	|| input == KEY_RIGHT) {
+		return true;
+	}
+	return false;
+}
+
+bool
+isEnterKey(int input)
+{
+	if(input == '\n'
+	|| input == KEY_ENTER) {
 		return true;
 	}
 	return false;

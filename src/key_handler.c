@@ -4,6 +4,22 @@
 #define KEYHANDLER_C
 
 void
+escape_handler(int input)
+{
+		MODE = "";
+		update_status_bar();
+}
+
+void
+enter_handler(int input)
+{
+		current_y++;
+		current_x = 0;
+		update_status_bar();
+		move(current_y, current_x);
+}
+
+void
 arrow_handler(int input)
 {
 	if(input == KEY_UP && current_y > 0) {
@@ -31,21 +47,13 @@ input_loop(int input)
 	while(true) {
 		input = getch();
 		getyx(stdscr, current_y, current_x);
-		if(input == 27) {
-			MODE = "";
-			update_status_bar();
+		if(isEscapeKey(input)) {
+			escape_handler(input);
 			return;
-		}
-
-		if(input == '\n') {
-			current_y++;
-			current_x = 0;
-			update_status_bar();
-			move(current_y, current_x);
+		} else if(isEnterKey(input)) {
+			enter_handler(input);
 			continue;
-		}
-
-		if(isArrowKey(input)) {
+		} else if(isArrowKey(input)) {
 			arrow_handler(input);
 			continue;
 		}

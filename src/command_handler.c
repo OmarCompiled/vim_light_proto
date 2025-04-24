@@ -9,10 +9,10 @@ validate_command()
 	if(!strcmp(command, "q")) {
 		exit(0);
 	} else {
-	  move(MAX_Y, 0);
-		clrtoeol();
 		raw();
 	  move(MAX_Y, 0);
+		clrtoeol();
+		move(MAX_Y, 0);
 		attron(A_REVERSE);
 		addstr("unkown command!");
 		attroff(A_REVERSE);
